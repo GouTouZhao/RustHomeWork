@@ -19,4 +19,4 @@ export const generateMockData = () => {
   return data;
 };
 
-export const mockBlogData = generateMockData();
+export const mockPostData = generateMockData();

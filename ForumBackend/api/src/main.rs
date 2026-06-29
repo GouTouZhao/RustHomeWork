@@ -2,6 +2,7 @@ use axum::{
     routing::{get, post},
     Router, Json,
 };
+use tower_http::cors::{Any, CorsLayer};
 use common::config::load_config;
 use serde_json::json;
 use tokio::net::TcpListener;
@@ -45,6 +46,11 @@ async fn get_article_list() -> Json<serde_json::Value> {
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let _config = load_config()?;
 
+    let cors = CorsLayer::new()
+        .allow_origin(Any)
+        .allow_methods(Any)
+        .allow_headers(Any);
+
     let app = Router::new()
         .route("/health", get(health_check))
         .route("/api/v1/user/login", post(login))
@@ -52,7 +58,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         // Add mocked endpoints the frontend expects locally:
         .route("/user/get_user_photo_compre", post(get_user_photo_compre))
         .route("/user/refresh_token", post(refresh_token))
-        .route("/static/get_article_list", post(get_article_list));
+        .route("/static/get_article_list", post(get_article_list))
+        .layer(cors);
 
     let addr = "[::]:8080";
     let listener = TcpListener::bind(addr).await?;

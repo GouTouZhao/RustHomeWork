@@ -138,7 +138,7 @@ onUnmounted(() => {
       </div>
       
       <div v-else-if="isEmpty" class="empty-state list-reveal" :key="'empty-' + currentPartition">
-        还没有发布任何博客
+        还没有发布任何帖子
       </div>
       
       <div v-else class="post-list">

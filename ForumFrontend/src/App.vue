@@ -137,9 +137,6 @@ const goToPost = () => {
   router.push('/post');
 };
 
-const goToAuthor = () => {
-  router.push('/author');
-};
 
 const handleUserClick = () => {
   if (currentUser.value.isLoggedIn) {
@@ -199,10 +196,6 @@ const handleAuthAction = () => {
           {{ isDark ? '日间模式' : '夜间模式' }}
         </button>
 
-        <div v-if="isSidebarExpanded" class="profile-link" @click="goToAuthor">
-          <img src="./assets/GouTou.jpg" alt="Avatar" class="avatar-small" />
-          <span class="profile-name">GouTou</span>
-        </div>
       </div>
 
       <nav v-if="isSidebarExpanded" class="sidebar-middle">
@@ -216,23 +209,6 @@ const handleAuthAction = () => {
           <button v-if="currentPartition === 'forum'" class="publish-post-btn" @click="goToPost">
             发布帖子
           </button>
-
-          <div class="sidebar-divider"></div>
-          
-          <div class="sidebar-pagination-btn" v-if="hasPrevPage" @click="prevPage">
-            ......
-          </div>
-
-          <ul class="sidebar-blog-links">
-            <li v-if="isEmpty" class="sidebar-empty">无内容</li>
-            <li v-for="item in paginatedList" :key="item.id" class="sidebar-blog-item" @click="router.push(`/article/${item.id}`)">
-              {{ item.title }}
-            </li>
-          </ul>
-
-          <div class="sidebar-pagination-btn" v-if="hasNextPage" @click="nextPage">
-            ......
-          </div>
         </div>
       </nav>
 
@@ -307,35 +283,6 @@ const handleAuthAction = () => {
   opacity: 1;
 }
 
-.profile-link {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 10px;
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 8px;
-  transition: background-color 0.2s;
-  width: 100%;
-}
-
-.profile-link:hover {
-  background-color: var(--border-color);
-}
-
-.avatar-small {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--bg-color);
-}
-
-.profile-name {
-  font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 0.5px;
-}
 
 .sidebar-middle {
   padding: 0 20px;
@@ -390,53 +337,6 @@ const handleAuthAction = () => {
 
 .publish-post-btn:hover {
   opacity: 0.9;
-}
-
-.sidebar-divider {
-  height: 1px;
-  background-color: var(--border-color);
-  width: 100%;
-  margin-bottom: 8px;
-}
-
-.sidebar-pagination-btn {
-  font-size: 14px;
-  font-weight: 700;
-  text-align: center;
-  cursor: pointer;
-  opacity: 0.5;
-  letter-spacing: 2px;
-  padding: 4px 0;
-  transition: opacity 0.2s;
-}
-
-.sidebar-pagination-btn:hover {
-  opacity: 1;
-}
-
-.sidebar-blog-links {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 0;
-  margin: 0;
-}
-
-.sidebar-blog-item, .sidebar-empty {
-  font-size: 13px;
-  font-weight: 500;
-  opacity: 0.7;
-  cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: opacity 0.2s;
-}
-
-.sidebar-blog-item:hover {
-  opacity: 1;
-  text-decoration: underline;
 }
 
 .sidebar-bottom {

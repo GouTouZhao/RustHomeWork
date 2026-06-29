@@ -9,11 +9,7 @@ const router = createRouter({
       path: '/',
       redirect: '/forum'
     },
-    {
-      path: '/author',
-      name: 'author',
-      component: () => import('../views/AuthorView.vue')
-    },
+
     {
       path: '/profile',
       name: 'profile',

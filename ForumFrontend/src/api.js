@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://192.168.49.2:30002',
+  baseURL: 'http://127.0.0.1:30002',
   timeout: 10000,
   withCredentials: true,
   headers: {
@@ -75,7 +75,7 @@ api.interceptors.response.use(
       try {
         // Assume backend refresh token endpoint is /user/refresh_token
         // We use a fresh axios instance to avoid interceptor loops
-        const refreshResponse = await axios.post('http://192.168.49.2:30002/user/refresh_token', {}, {
+        const refreshResponse = await axios.post('http://127.0.0.1:30002/user/refresh_token', {}, {
           withCredentials: true
         });
         
