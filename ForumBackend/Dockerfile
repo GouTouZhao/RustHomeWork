@@ -8,7 +8,7 @@ ENV SERVER_DIR=/forum
 WORKDIR ${SERVER_DIR}
 
 # 安装编译依赖
-RUN apk add --no-cache musl-dev protobuf-dev
+RUN apk add --no-cache musl-dev protobuf-dev openssl-dev pkgconfig
 
 # 复制文件到工作区
 COPY . .
@@ -21,6 +21,8 @@ RUN mkdir -p /output/bin && cp target/release/${SERVICE} /output/bin/app
 FROM alpine:latest
 
 WORKDIR /app
+
+RUN apk add --no-cache ca-certificates openssl
 
 COPY --from=builder /output/bin/app .
 
