@@ -1,5 +1,5 @@
 # 环境设置
-FROM rust:1.76-alpine AS builder
+FROM rust:alpine AS builder
 
 ARG SERVICE
 
