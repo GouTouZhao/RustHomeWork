@@ -47,9 +47,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let _config = load_config()?;
 
     let cors = CorsLayer::new()
-        .allow_origin(Any)
+        .allow_origin([
+            "http://localhost:5173".parse::<axum::http::HeaderValue>().unwrap(),
+            "http://127.0.0.1:5173".parse::<axum::http::HeaderValue>().unwrap(),
+        ])
         .allow_methods(Any)
-        .allow_headers(Any);
+        .allow_headers(Any)
+        .allow_credentials(true);
 
     let app = Router::new()
         .route("/health", get(health_check))
