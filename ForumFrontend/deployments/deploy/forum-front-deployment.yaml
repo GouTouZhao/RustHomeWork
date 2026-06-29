@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forum-front-deployment
+  namespace: forum
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: forum-front
+  template:
+    metadata:
+      labels:
+        app: forum-front
+    spec:
+      containers:
+        - name: forum-front
+          image: goutouz/blog-front:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
