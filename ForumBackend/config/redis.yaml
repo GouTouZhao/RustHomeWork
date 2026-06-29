@@ -1,0 +1,6 @@
+# Redis
+
+host: "host.minikube.internal"
+port: 6379
+password: "Password"
+dbname: 0

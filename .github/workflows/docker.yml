@@ -1,0 +1,66 @@
+name: Docker build and push images
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-backend:
+    runs-on: ubuntu-latest
+    
+    strategy:
+        matrix:
+          include:
+            - service: api
+              image: forum-api
+            
+            - service: admin
+              image: forum-rpc-admin
+
+            - service: user
+              image: forum-rpc-user
+
+            - service: static_svc
+              image: forum-rpc-static
+
+            - service: image
+              image: forum-rpc-image
+
+            - service: bmanager
+              image: forum-rpc-bmanager
+    
+    steps:
+        - uses: actions/checkout@v4
+
+        - uses: docker/login-action@v3
+          with:
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_TOKEN }}
+
+        - uses: docker/build-push-action@v5
+          with: 
+            context: ./ForumBackend
+            file: ./ForumBackend/Dockerfile
+            build-args: |
+                SERVICE=${{matrix.service}}
+            push: true
+            tags: goutouz/${{matrix.image}}:latest
+
+  build-frontend:
+    runs-on: ubuntu-latest
+    
+    steps:
+        - uses: actions/checkout@v4
+
+        - uses: docker/login-action@v3
+          with:
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_TOKEN }}
+
+        - uses: docker/build-push-action@v5
+          with: 
+            context: ./ForumFrontend
+            file: ./ForumFrontend/Dockerfile
+            push: true
+            tags: goutouz/blog-front:latest

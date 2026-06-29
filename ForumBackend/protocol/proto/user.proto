@@ -1,0 +1,121 @@
+﻿syntax = "proto3";
+
+package newblog.user;
+
+import "sdkws.proto";
+
+option go_package = "github.com/GouTouZhao/BlogNew/internal/protocol/user;protouser";
+
+message UserRegisterReq {
+    string email = 1;
+    string password = 2;
+    string email_code = 3;
+}
+
+message UserRegisterResp {
+    string access_token = 1;
+    string refresh_token = 2;
+    string email = 3;
+    int64 user_id = 4;
+    string nickname = 5;
+    string proto_url = 6;
+}
+
+message UserLoginReq {
+    string email = 1;
+    string password = 2;
+    string captcha_id = 3;
+    string captcha_answer = 4;
+}
+
+message UserLoginResp {
+    string access_token = 1;
+    string refresh_token = 2;
+    string email = 3;
+    int64 user_id = 4;
+    string nickname = 5;
+    string proto_url = 6;
+}
+
+message UpdateUserInfoReq {
+    newblog.sdkws.UserRequestBase base = 1;
+    string nick_name = 2;
+}
+
+message UpdateUserInfoResp {
+}
+
+message GetUserInfoReq {
+    newblog.sdkws.UserRequestBase base = 1;
+}
+
+message GetUserInfoResp {
+    newblog.sdkws.UserInfo user_info = 1;
+    string email = 2;
+}
+
+message GetImageUrlReq {
+    newblog.sdkws.UserRequestBase base = 1;
+    string image_key = 2;
+}
+
+message GetImageUrlResp {
+    string url = 1;
+}
+
+message GetUserPhotoCompreReq {
+    newblog.sdkws.UserRequestBase base = 1;
+    string image_key = 2;
+}
+
+message GetUserPhotoCompreResp {
+    string url = 1;
+}
+
+message PostUpdateProfilePhotoReq {
+    newblog.sdkws.UserRequestBase base = 1;
+    string image_key = 2;
+}
+
+message PostUpdateProfilePhotoResp {
+    newblog.sdkws.UserInfo user_info = 1;
+}
+
+message GetCaptchaReq {
+}
+
+message GetCaptchaResp {
+    string id = 1;
+    string b64s = 2;
+}
+
+message SendEmailCodeReq {
+    string email = 1;
+    string captcha_id = 2;
+    string captcha_answer = 3;
+}
+
+message SendEmailCodeResp {
+}
+
+message PostUpdatePasswordReq {
+    string email = 1;
+    string password = 2;
+    string email_code = 3;
+}
+
+message PostUpdatePasswordResp {
+}
+
+service User{
+  rpc UserRegister(UserRegisterReq) returns (UserRegisterResp);
+  rpc UserLogin(UserLoginReq) returns (UserLoginResp);
+  rpc UpdateUserInfo(UpdateUserInfoReq) returns (UpdateUserInfoResp);
+  rpc GetUserInfo(GetUserInfoReq) returns (GetUserInfoResp);
+  rpc GetImageUrl(GetImageUrlReq) returns (GetImageUrlResp);
+  rpc GetUserPhotoCompre(GetUserPhotoCompreReq) returns (GetUserPhotoCompreResp);
+  rpc PostUpdateProfilePhoto(PostUpdateProfilePhotoReq) returns (PostUpdateProfilePhotoResp);
+  rpc GetCaptcha(GetCaptchaReq) returns (GetCaptchaResp);
+  rpc SendEmailCode(SendEmailCodeReq) returns (SendEmailCodeResp);
+  rpc PostUpdatePassword(PostUpdatePasswordReq) returns (PostUpdatePasswordResp);
+}

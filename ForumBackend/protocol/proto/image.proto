@@ -1,0 +1,30 @@
+﻿syntax = "proto3";
+
+package newblog.image;
+
+option go_package = "github.com/GouTouZhao/BlogNew/internal/protocol/image;protoimage";
+
+// ===== 鍥剧墖鍥炰紶 (鏈櫥褰曠敤鎴? =====
+
+message GetImageReq {
+    string image_key = 1; // OSS 涓殑鍥剧墖璺緞
+}
+
+message GetImageResp {
+    bytes image_data = 1;    // 鍘嬬缉鍚庣殑鍥剧墖浜岃繘鍒舵暟鎹?
+    string content_type = 2; // 鍥剧墖 MIME 绫诲瀷
+}
+
+service Image {
+    rpc GetImage(GetImageReq) returns (GetImageResp);
+    rpc GetAvatarThumbnail(GetAvatarThumbnailReq) returns (GetAvatarThumbnailResp);
+}
+
+message GetAvatarThumbnailReq {
+    string image_key = 1;
+}
+
+message GetAvatarThumbnailResp {
+    bytes image_data = 1;
+    string content_type = 2;
+}

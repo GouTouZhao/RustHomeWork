@@ -1,0 +1,15 @@
+# type MySQL struct {
+# 	Host     string `yaml:"host"`
+# 	Port     int    `yaml:"port"`
+# 	Username string `yaml:"username"`
+# 	Password string `yaml:"password"`
+# 	DBName   string `yaml:"dbname"`
+# }
+
+# MySQL:
+
+host: "host.minikube.internal"
+port: 3306
+username: "root"
+password: "password"
+dbname: "blog"

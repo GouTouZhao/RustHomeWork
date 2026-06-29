@@ -1,0 +1,9 @@
+api:
+  # listenIP 指被允许访问的ip地址，0.0.0.0表示所有ip地址，即公开
+  listenIP: 0.0.0.0
+
+  # ports 指监听的端口
+  ports: [10002]
+
+  # compressionLevel HTTP返回压缩级别，0表示不压缩
+  compressionLevel: 0

@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forum-image-deployment
+  namespace: default
+  labels:
+    app: forum-image
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: forum-image
+  template:
+    metadata:
+      labels:
+        app: forum-image
+      annotations:
+        kubernetes.io/egress-bandwidth: "1.5M"
+    spec:
+      containers:
+      - name: forum-image
+        image: goutouz/forum-rpc-image:latest
+        ports:
+        - containerPort: 10008
+        env:
+        - name: CONFIG_PATH
+          value: "/config"
+        - name: ACCESSKEYID
+          valueFrom:
+            secretKeyRef:
+              name: forum-secret
+              key: OSS_ACCESSKEYID
+        - name: ACCESSKEYSECRET
+          valueFrom:
+            secretKeyRef:
+              name: forum-secret
+              key: OSS_ACCESSKEYSECRET
+        - name: ROLEARN
+          valueFrom:
+            secretKeyRef:
+              name: forum-secret
+              key: OSS_ROLEARN
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+        volumeMounts:
+        - name: forum-config
+          mountPath: /config
+          readOnly: true
+      volumes:
+      - name: forum-config
+        configMap:
+          name: forum-config

@@ -1,0 +1,14 @@
+# 阿里云 OSS 配置
+# AccessKeyID 和 AccessKeySecret 通过 K8s Secret 环境变量注入:
+#   OSS_ACCESSKEYID -> oss.accessKeyId
+#   OSS_ACCESSKEYSECRET -> oss.accessKeySecret
+#   OSS_ROLEARN -> oss.roleArn
+
+endpoint: "oss-cn-hangzhou.aliyuncs.com"
+internalEndpoint: "oss-cn-hangzhou-internal.aliyuncs.com"
+bucket: "blog-goutou"
+
+
+accessKeyId: "placeholder"
+accessKeySecret: "placeholder"
+roleArn: "placeholder"

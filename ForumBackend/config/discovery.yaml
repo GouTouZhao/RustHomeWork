@@ -1,0 +1,12 @@
+enable: kubenetes
+
+kubenetes:
+  namespace: default
+
+rpcService: 
+  api: blog-api-service
+  user: blog-user-service
+  static: blog-static-service
+  bmanager: blog-bmanager-service
+  admin: blog-admin-service
+  image: blog-image-service

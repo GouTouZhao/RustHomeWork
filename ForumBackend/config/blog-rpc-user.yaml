@@ -1,0 +1,10 @@
+rpc:
+  registerIP: 0.0.0.0
+  listenIP: 0.0.0.0
+  port: 10003
+
+email:
+  host: smtp.163.com
+  port: 465
+  user: goutou0624@163.com
+  password: "" # 由 k8s secret (EMAIL_PASSWORD) 注入

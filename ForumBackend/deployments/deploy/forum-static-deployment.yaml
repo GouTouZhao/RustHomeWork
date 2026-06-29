@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forum-static-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: forum-static
+  template:
+    metadata:
+      labels:
+        app: forum-static
+    spec:
+      containers:
+        - name: forum-static
+          image: goutouz/forum-rpc-static:latest
+          env:
+            - name: CONFIG_PATH
+              value: "/config"
+            
+          envFrom:
+            - secretRef:
+                name: forum-secret
+              
+          volumeMounts:
+            - name: forum-config
+              mountPath: /config
+              readOnly: true
+          ports:
+            - containerPort: 10004
+      
+      volumes:
+        - name: forum-config
+          configMap:
+            name: forum-config

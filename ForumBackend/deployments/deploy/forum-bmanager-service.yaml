@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: forum-bmanager-service
+spec:
+  selector:
+    app: forum-bmanager
+  ports:
+    - name: http-10006
+      protocol: TCP
+      port: 10006
+      targetPort: 10006
+  type: ClusterIP

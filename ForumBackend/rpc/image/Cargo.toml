@@ -1,0 +1,10 @@
+[package]
+name = "image"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+common = { version = "0.1.0", path = "../../common" }
+protocol = { version = "0.1.0", path = "../../protocol" }
+tokio = { workspace = true, features = ["full"] }
+tonic.workspace = true

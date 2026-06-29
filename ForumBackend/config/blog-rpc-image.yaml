@@ -1,0 +1,3 @@
+rpc:
+  listenIP: ""
+  port: 10008

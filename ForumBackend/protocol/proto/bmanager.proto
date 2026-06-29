@@ -1,0 +1,105 @@
+﻿syntax = "proto3";
+
+package newblog.bmanager;
+
+import "sdkws.proto";
+
+option go_package = "github.com/GouTouZhao/BlogNew/internal/protocol/bmanager;protobmanager";
+
+// ===== 璇勮绠＄悊 (鍘?bmanager) =====
+
+message PushForumCommentNewReq {
+    newblog.sdkws.UserRequestBase base = 1;
+    string article_id = 2;
+    string content = 3;
+    bool is_reply = 4;
+    string root_comment_id = 5;
+    int64 reply_to_user_id = 6;
+}
+
+message PushForumCommentNewResp {
+    string comment_id = 1;
+}
+
+message DeleteCommentReq {
+    string comment_id = 1;
+    int64 user_id = 2;
+}
+
+message DeleteCommentResp {
+}
+
+// ===== 璁哄潧甯栧瓙绠＄悊 (浠?forum 鍚堝苟) =====
+
+message PushForumNewReq {
+    string title = 1;
+    string content = 2;
+    string cover_image = 3;
+    int64 author_id = 4;
+}
+
+message PushForumNewResp {
+    string article_id = 1;
+}
+
+message DeleteForumReq {
+    string article_id = 1;
+    int64 user_id = 2;
+}
+
+message DeleteForumResp {
+}
+
+message UpdateForumReq {
+    string article_id = 1;
+    string title = 2;
+    string content = 3;
+    string cover_image = 4;
+    int64 user_id = 5;
+}
+
+message UpdateForumResp {
+}
+
+// ===== OSS 鍥剧墖绠＄悊 (浠?image 杩佺Щ) =====
+
+message GetOssKeyReq {
+    newblog.sdkws.UserRequestBase base = 1;
+    string file_ext = 2; // 鏂囦欢鎵╁睍鍚? jpg, png, webp 绛?
+}
+
+message GetOssKeyResp {
+    string host = 1;              // OSS 涓婁紶鍦板潃
+    string key = 2;               // 鏂囦欢鍦?OSS 涓殑璺緞
+    string policy = 3;            // Base64 缂栫爜鐨?Policy
+    string oss_access_key_id = 4; // AccessKeyId
+    string signature = 5;         // 绛惧悕
+    int64 expire = 6;             // 杩囨湡鏃堕棿鎴?
+    string security_token = 7;    // STS SecurityToken
+}
+
+message GetImageUrlReq {
+    newblog.sdkws.UserRequestBase base = 1;
+    string image_key = 2; // OSS 涓殑鍥剧墖璺緞
+}
+
+message GetImageUrlResp {
+    string url = 1; // 5鍒嗛挓鏈夋晥鐨勭鍚?URL
+}
+
+// ===== 鏈嶅姟瀹氫箟 =====
+
+service BManager {
+    // 璇勮绠＄悊
+    rpc PushForumCommentNew(PushForumCommentNewReq) returns (PushForumCommentNewResp);
+    rpc DeleteComment(DeleteCommentReq) returns (DeleteCommentResp);
+
+    // 璁哄潧甯栧瓙绠＄悊 (浠?forum 鍚堝苟)
+    rpc PushForumNew(PushForumNewReq) returns (PushForumNewResp);
+    rpc DeleteForum(DeleteForumReq) returns (DeleteForumResp);
+    rpc UpdateForum(UpdateForumReq) returns (UpdateForumResp);
+
+    // OSS 鍥剧墖绠＄悊 (浠?image 杩佺Щ)
+    rpc GetOssKey(GetOssKeyReq) returns (GetOssKeyResp);
+    rpc GetImageUrl(GetImageUrlReq) returns (GetImageUrlResp);
+}

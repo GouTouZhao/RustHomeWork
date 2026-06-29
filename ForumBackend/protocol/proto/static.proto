@@ -1,0 +1,109 @@
+﻿syntax = "proto3";
+
+package newblog.static;
+
+import "sdkws.proto";
+
+option go_package = "github.com/GouTouZhao/BlogNew/internal/protocol/static;protostatic";
+
+message Article {
+    string article_id = 1;
+    string title = 2;
+    string cover_image = 3;
+    string author_id = 4;
+    string category_id = 5;
+    int32 status = 6;
+    int64 view_count = 7;
+    int64 like_count = 8;
+    int64 comment_count = 9;
+    int64 updated_at = 10;
+    string content = 11;
+}
+
+message GetArticleListReq {
+    string category_id = 1;
+    int32 page = 2;
+    int32 page_size = 3;
+}
+
+message GetArticleListResp {
+    repeated Article list = 1;
+    int64 total_count = 2;
+    int32 page = 3;
+    int32 page_size = 4;
+}
+
+message GetArticleDetailsReq {
+    string article_id = 1;
+}
+
+message GetArticleDetailsResp {
+    Article article = 1;
+    newblog.sdkws.UserInfo user_info = 2;
+}
+
+message AddViewCountReq {
+    string article_id = 1;
+}
+
+message AddViewCountResp {
+}
+
+
+
+service Static {
+  rpc GetArticleList(GetArticleListReq) returns (GetArticleListResp);
+  rpc GetArticleDetails(GetArticleDetailsReq) returns (GetArticleDetailsResp);
+  rpc AddViewCount(AddViewCountReq) returns (AddViewCountResp);
+  rpc GetCommentList(GetCommentListReq) returns (GetCommentListResp);
+  rpc GetCommentSonList(GetCommentSonListReq) returns (GetCommentSonListResp);
+  rpc GetLastBlogList(GetLastBlogListReq) returns (GetLastBlogListResp);
+}
+
+message GetLastBlogListReq {
+}
+
+message GetLastBlogListResp {
+    repeated Article list = 1;
+}
+
+message Comment {
+    string id = 1;
+    string article_id = 2;
+    newblog.sdkws.UserInfo user_info = 3;
+    string content = 4;
+    bool is_reply = 5;
+    string root_comment_id = 6;
+    newblog.sdkws.UserInfo reply_to_user_info = 7;
+    int32 like_count = 8;
+    int64 created_at = 9;
+    bool has_children = 10;
+}
+
+message GetCommentListReq {
+    string article_id = 1;
+    int32 page = 2;
+    int32 page_size = 3;
+    bool order_by_latest = 4;
+}
+
+message GetCommentListResp {
+    repeated Comment list = 1;
+    int64 total_count = 2;
+    int32 page = 3;
+    int32 page_size = 4;
+}
+
+message GetCommentSonListReq {
+    string root_comment_id = 1;
+    int32 page = 2;
+    int32 page_size = 3;
+    bool order_by_latest = 4;
+}
+
+message GetCommentSonListResp {
+    repeated Comment list = 1;
+    int64 total_count = 2;
+    int32 page = 3;
+    int32 page_size = 4;
+}

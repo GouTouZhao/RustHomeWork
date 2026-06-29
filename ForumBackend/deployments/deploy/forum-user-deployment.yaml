@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forum-user-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: forum-user
+  template:
+    metadata:
+      labels:
+        app: forum-user
+    spec:
+      containers:
+        - name: forum-user
+          image: goutouz/forum-rpc-user:latest
+          env:
+            - name: CONFIG_PATH
+              value: "/config"
+            - name: ACCESSKEYID
+              valueFrom:
+                secretKeyRef:
+                  name: forum-secret
+                  key: OSS_ACCESSKEYID
+            - name: ACCESSKEYSECRET
+              valueFrom:
+                secretKeyRef:
+                  name: forum-secret
+                  key: OSS_ACCESSKEYSECRET
+            - name: ROLEARN
+              valueFrom:
+                secretKeyRef:
+                  name: forum-secret
+                  key: OSS_ROLEARN
+          envFrom:
+            - secretRef:
+                name: forum-secret
+              
+          volumeMounts:
+            - name: forum-config
+              mountPath: /config
+              readOnly: true
+          ports:
+            - containerPort: 10003
+      
+      volumes:
+        - name: forum-config
+          configMap:
+            name: forum-config

@@ -1,0 +1,8 @@
+blog-api:
+  port: 10002
+
+blog-rpc-user:
+  port: 10003
+  
+blog-rpc-static:
+  port: 10004

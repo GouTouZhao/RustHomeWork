@@ -1,0 +1,19 @@
+﻿syntax = "proto3";
+
+package newblog.sdkws;
+
+
+option go_package = "github.com/GouTouZhao/BlogNew/internal/protocol/sdkws;protosdkws";
+
+message UserInfo{
+  string user_id = 1;
+  string nick_name = 2;
+  string create_time = 3;
+  string proto_url = 4;
+}
+
+message UserRequestBase {
+  string access_token = 1;
+  string email = 2;
+  int64 user_id = 3;
+}
