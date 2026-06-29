@@ -1,7 +1,4 @@
 export const partitions = [
-  { id: 'photography', name: '摄影', desc: '永远年轻，永远热爱，永远热泪盈眶。', path: '/photography' },
-  { id: 'technology', name: '技术', desc: '一个小白在各个方向上的兴趣探索。', path: '/technology' },
-  { id: 'life', name: '生活', desc: '一点点日常分享。', path: '/life' },
   { id: 'forum', name: '论坛', desc: '加入社区，参与热烈讨论。', path: '/forum' }
 ];
 

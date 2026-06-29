@@ -207,9 +207,6 @@ const handleAuthAction = () => {
 
       <nav v-if="isSidebarExpanded" class="sidebar-middle">
         <ul class="nav-links">
-          <li @click="goHome" :class="{ active: route.path === '/' }">
-            <span class="nav-text">首页</span>
-          </li>
           <li v-for="p in partitions" :key="p.id" @click="goToPartition(p.id)" :class="{ active: route.params.partition === p.id }">
             <span class="nav-text">{{ p.name }}</span>
           </li>
