@@ -51,8 +51,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             "http://localhost:5173".parse::<axum::http::HeaderValue>().unwrap(),
             "http://127.0.0.1:5173".parse::<axum::http::HeaderValue>().unwrap(),
         ])
-        .allow_methods(Any)
-        .allow_headers(Any)
+        .allow_methods([
+            axum::http::Method::GET,
+            axum::http::Method::POST,
+            axum::http::Method::PUT,
+            axum::http::Method::DELETE,
+            axum::http::Method::OPTIONS,
+        ])
+        .allow_headers([
+            axum::http::header::AUTHORIZATION,
+            axum::http::header::ACCEPT,
+            axum::http::header::CONTENT_TYPE,
+        ])
         .allow_credentials(true);
 
     let app = Router::new()
