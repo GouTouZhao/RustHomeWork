@@ -1,15 +1,16 @@
 @echo off
-REM 创建命名空间
+REM Create namespace
 kubectl create namespace forum
 
-REM 部署后端所有的服务
+REM Deploy backend services
 kubectl apply -f .\ForumBackend\deployments\deploy\ -n forum
 
-REM 部署前端服务
+REM Deploy frontend services
 kubectl apply -f .\ForumFrontend\deployments\deploy\ -n forum
 
 echo.
-echo K8s 部署已触发！你可以通过 kubectl get pods -n forum 查看启动状态。
-echo 前端入口可通过 NodePort 30080 访问: http://^<你的节点IP^>:30080
+echo [SUCCESS] K8s deployment triggered! 
+echo Run "kubectl get pods -n forum" to check status.
+echo Frontend is accessible via NodePort 30080: http://^<Your-Node-IP^>:30080
 echo.
 pause
