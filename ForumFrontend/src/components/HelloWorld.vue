@@ -1,4 +1,7 @@
 <script setup>
+// ==========================================
+// 阶段一：模块引入与状态定义
+// ==========================================
 import { ref } from 'vue'
 import viteLogo from '../assets/vite.svg'
 import heroImg from '../assets/hero.png'
@@ -8,6 +11,9 @@ const count = ref(0)
 </script>
 
 <template>
+  <!-- ========================================== -->
+  <!-- 阶段二：视图模板定义 -->
+  <!-- ========================================== -->
   <section id="center">
     <div class="hero">
       <img :src="heroImg" class="base" width="170" height="179" alt="" />

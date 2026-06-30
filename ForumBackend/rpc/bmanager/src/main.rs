@@ -1,8 +1,14 @@
+// ==========================================
+// 阶段一：模块依赖与协议引入
+// ==========================================
 use common::config::load_config;
 use protocol::bmanager::b_manager_server::{BManager, BManagerServer};
 use protocol::bmanager::*;
 use tonic::{transport::Server, Request, Response, Status};
 
+// ==========================================
+// 阶段二：BManager 服务实现与接口逻辑
+// ==========================================
 #[derive(Default)]
 pub struct BManagerService {}
 
@@ -51,6 +57,9 @@ impl BManager for BManagerService {
     }
 }
 
+// ==========================================
+// 阶段三：BManager 服务主程序配置与启动
+// ==========================================
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let config = load_config()?;

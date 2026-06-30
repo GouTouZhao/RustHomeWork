@@ -1,9 +1,15 @@
+// ==========================================
+// 阶段一：模块依赖与结构体定义
+// ==========================================
 use std::env;
 
 pub struct ServiceDiscovery {
     pub namespace: String,
 }
 
+// ==========================================
+// 阶段二：服务发现核心实现
+// ==========================================
 impl ServiceDiscovery {
     pub fn new(namespace: String) -> Self {
         Self { namespace }

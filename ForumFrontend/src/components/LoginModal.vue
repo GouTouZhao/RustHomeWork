@@ -1,4 +1,7 @@
 <script setup>
+// ==========================================
+// 阶段一：模块引入与组件配置
+// ==========================================
 import { ref, onMounted, watch } from 'vue';
 import api from '../api';
 import { showToast } from '../utils/toast';
@@ -9,6 +12,9 @@ const props = defineProps({
 
 const emit = defineEmits(['close', 'loginSuccess']);
 
+// ==========================================
+// 阶段二：响应式状态定义
+// ==========================================
 // mode: 'login' | 'register' | 'forget'
 const mode = ref('login');
 const form = ref({
@@ -27,6 +33,9 @@ const loading = ref(false);
 const codeLoading = ref(false);
 const errorMsg = ref('');
 
+// ==========================================
+// 阶段三：API请求与业务逻辑处理
+// ==========================================
 const fetchCaptcha = async () => {
   try {
     const response = await api.post('/user/get_captcha', {});
@@ -207,6 +216,9 @@ const handleSubmit = async () => {
 </script>
 
 <template>
+  <!-- ========================================== -->
+  <!-- 阶段四：组件视图结构定义 -->
+  <!-- ========================================== -->
   <transition name="modal">
     <div v-if="isVisible" class="modal-overlay" @click.self="close">
       <div class="modal-card card">
@@ -299,6 +311,9 @@ const handleSubmit = async () => {
 </template>
 
 <style scoped>
+/* ========================================== */
+/* 阶段五：组件样式定义 */
+/* ========================================== */
 .modal-overlay {
   position: fixed;
   top: 0;

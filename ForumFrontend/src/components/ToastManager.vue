@@ -1,8 +1,14 @@
 <script setup>
+// ==========================================
+// 阶段一：模块与状态引入
+// ==========================================
 import { toasts } from '../utils/toast';
 </script>
 
 <template>
+  <!-- ========================================== -->
+  <!-- 阶段二：视图模板定义 -->
+  <!-- ========================================== -->
   <div class="toast-container">
     <transition-group name="toast-anim" tag="div" class="toast-wrapper">
       <div 
@@ -18,6 +24,9 @@ import { toasts } from '../utils/toast';
 </template>
 
 <style scoped>
+/* ========================================== */
+/* 阶段三：组件样式定义 */
+/* ========================================== */
 .toast-container {
   position: fixed;
   top: 40px;

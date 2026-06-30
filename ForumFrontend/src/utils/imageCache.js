@@ -1,8 +1,14 @@
+// ==========================================
+// 阶段一：常量定义与依赖引入
+// ==========================================
 import api from '../api';
 
 const CACHE_PREFIX = 'oss_img_';
 const CACHE_DURATION = 4.5 * 60 * 1000; // 4.5 minutes
 
+// ==========================================
+// 阶段二：缓存与签名URL获取逻辑
+// ==========================================
 /**
  * Gets the actual URL for an OSS image key, utilizing localStorage cache.
  * Falls back to proxy URL if user is not logged in.

@@ -1,4 +1,7 @@
 <script setup>
+// ==========================================
+// 阶段一：模块与依赖引入
+// ==========================================
 import { reactive, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import api from '../api';
@@ -6,6 +9,9 @@ import { showToast } from '../utils/toast';
 
 import Compressor from 'compressorjs';
 
+// ==========================================
+// 阶段二：响应式状态定义
+// ==========================================
 const router = useRouter();
 
 const isEditingName = ref(false);
@@ -13,6 +19,9 @@ const editingNameValue = ref('');
 
 const currentUser = ref(null);
 
+// ==========================================
+// 阶段三：用户数据加载与权限验证
+// ==========================================
 const checkAuth = () => {
   const token = localStorage.getItem('access_token');
   if (token) {
@@ -61,6 +70,9 @@ const loadUserAvatar = async () => {
   }
 };
 
+// ==========================================
+// 阶段四：头像处理与上传逻辑
+// ==========================================
 const fileInput = ref(null);
 const uploadStatus = ref('');
 const ossKey = ref('');
@@ -161,6 +173,9 @@ const confirmUpdateAvatar = async () => {
   }
 };
 
+// ==========================================
+// 阶段五：用户资料修改逻辑
+// ==========================================
 const handleEditName = () => {
   isEditingName.value = true;
   editingNameValue.value = currentUser.value.nickname;
@@ -199,6 +214,9 @@ const saveName = async () => {
   }
 };
 
+// ==========================================
+// 阶段六：生命周期挂载钩子
+// ==========================================
 onMounted(() => {
   checkAuth();
   if (!currentUser.value) {
@@ -211,6 +229,9 @@ onMounted(() => {
 </script>
 
 <template>
+  <!-- ========================================== -->
+  <!-- 阶段七：组件视图结构定义 -->
+  <!-- ========================================== -->
   <div class="profile-fullscreen">
     <div class="profile-content">
       <div class="profile-card">
@@ -264,6 +285,9 @@ onMounted(() => {
 </template>
 
 <style scoped>
+/* ========================================== */
+/* 阶段八：页面样式定义 */
+/* ========================================== */
 .profile-fullscreen {
   position: fixed;
   top: 0;

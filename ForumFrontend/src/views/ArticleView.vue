@@ -1,4 +1,7 @@
 <script setup>
+// ==========================================
+// 阶段一：模块与状态引入
+// ==========================================
 import { ref, onMounted, onUnmounted, nextTick, computed, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import api from '../api';
@@ -9,6 +12,9 @@ import Compressor from 'compressorjs';
 import { currentPartition } from '../store';
 import { getOssImageUrl } from '../utils/imageCache';
 
+// ==========================================
+// 阶段二：响应式状态定义
+// ==========================================
 const route = useRoute();
 const router = useRouter();
 
@@ -30,6 +36,9 @@ const orderByLatest = ref(true);
 // Cover image
 const coverImageUrl = ref('');
 
+// ==========================================
+// 阶段三：权限验证与用户信息处理
+// ==========================================
 const checkAuth = () => {
   const token = localStorage.getItem('access_token');
   const userId = localStorage.getItem('user_id');
@@ -52,6 +61,9 @@ const isAdmin = computed(() => {
 
 
 
+// ==========================================
+// 阶段四：数据获取与业务逻辑 (API)
+// ==========================================
 const loadCoverImage = async () => {
   if (!article.value || !article.value.cover_image) return;
   try {
@@ -436,6 +448,9 @@ const renderedContent = (content) => {
 
 let viewTimer = null;
 
+// ==========================================
+// 阶段五：组件生命周期与事件监听
+// ==========================================
 onMounted(() => {
   checkAuth();
   fetchArticleDetails();
@@ -462,6 +477,9 @@ onUnmounted(() => {
 </script>
 
 <template>
+  <!-- ========================================== -->
+  <!-- 阶段六：视图结构定义 -->
+  <!-- ========================================== -->
   <div class="article-view">
     <div v-if="isLoading" class="loading">加载中...</div>
     <div v-else-if="!article" class="error">文章不存在或已被删除</div>
@@ -599,6 +617,9 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+/* ========================================== */
+/* 阶段七：页面样式与响应式设计 */
+/* ========================================== */
 .article-view {
   max-width: 800px;
   margin: 0 auto;

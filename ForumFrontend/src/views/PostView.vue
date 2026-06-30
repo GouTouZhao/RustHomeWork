@@ -1,4 +1,7 @@
 <script setup>
+// ==========================================
+// 阶段一：模块与依赖引入
+// ==========================================
 import { ref, onMounted, computed, nextTick } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import api from '../api';
@@ -8,6 +11,9 @@ import Compressor from 'compressorjs';
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 
+// ==========================================
+// 阶段二：响应式状态与计算属性定义
+// ==========================================
 const route = useRoute();
 const router = useRouter();
 
@@ -30,6 +36,9 @@ const blocks = ref([{ id: Date.now() + '-' + Math.random(), type: 'text', conten
 const dragIndex = ref(-1);
 const lastFocusedBlockIndex = ref(0);
 
+// ==========================================
+// 阶段三：工具函数与内容解析逻辑
+// ==========================================
 const getImageUrl = (key) => {
   if (localImageCache.value[key]) return localImageCache.value[key];
   return `${api.defaults.baseURL}/image/get_image?key=${encodeURIComponent(key)}`;
@@ -105,6 +114,9 @@ const fetchEditPost = async () => {
   }
 };
 
+// ==========================================
+// 阶段四：生命周期挂载与数据初始化
+// ==========================================
 onMounted(() => {
   const token = localStorage.getItem('access_token');
   if (!token) {
@@ -159,6 +171,9 @@ const renderedContent = computed(() => {
   });
 });
 
+// ==========================================
+// 阶段五：编辑器与文件上传处理逻辑
+// ==========================================
 // --- Cover Image Upload ---
 const handleCoverChange = async (event) => {
   const file = event.target.files[0];
@@ -502,6 +517,9 @@ const submitPost = async () => {
 </script>
 
 <template>
+  <!-- ========================================== -->
+  <!-- 阶段六：视图模板定义 -->
+  <!-- ========================================== -->
   <div class="post-view">
     <div class="post-container">
       <div class="post-header">
@@ -640,6 +658,9 @@ const submitPost = async () => {
 </template>
 
 <style scoped>
+/* ========================================== */
+/* 阶段七：页面样式与响应式设计 */
+/* ========================================== */
 .post-view {
   max-width: 900px;
   margin: 0 auto;

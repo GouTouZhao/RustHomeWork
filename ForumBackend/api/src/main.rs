@@ -1,3 +1,6 @@
+// ==========================================
+// 阶段一：模块与依赖引入
+// ==========================================
 use axum::{
     routing::{get, post},
     Router, Json,
@@ -7,6 +10,9 @@ use common::config::load_config;
 use serde_json::json;
 use tokio::net::TcpListener;
 
+// ==========================================
+// 阶段二：Mock 数据处理器定义 (User & Auth)
+// ==========================================
 async fn health_check() -> Json<serde_json::Value> {
     Json(json!({
         "status": "ok"
@@ -59,6 +65,9 @@ async fn user_login() -> Json<serde_json::Value> {
     }))
 }
 
+// ==========================================
+// 阶段三：Mock 数据处理器定义 (Static & Admin)
+// ==========================================
 async fn generic_mock() -> Json<serde_json::Value> {
     Json(json!({ "code": 0, "errCode": 0, "msg": "success", "data": {} }))
 }
@@ -86,6 +95,9 @@ async fn get_article_list() -> Json<serde_json::Value> {
     Json(json!({ "code": 0, "msg": "success", "data": [] }))
 }
 
+// ==========================================
+// 阶段四：网关主程序配置与启动
+// ==========================================
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let _config = load_config()?;

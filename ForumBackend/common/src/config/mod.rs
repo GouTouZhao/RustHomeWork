@@ -1,3 +1,6 @@
+// ==========================================
+// 阶段一：模块依赖与核心结构体定义
+// ==========================================
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -8,6 +11,9 @@ pub struct ALLConfig {
     pub oss: OSS,
 }
 
+// ==========================================
+// 阶段二：各组件配置结构体定义
+// ==========================================
 #[derive(Debug, Deserialize, Serialize, Default)]
 pub struct Discovery {
     pub enable: String,
@@ -60,6 +66,9 @@ pub struct OSS {
     pub role_arn: String,
 }
 
+// ==========================================
+// 阶段三：配置加载与解析逻辑
+// ==========================================
 pub fn load_config() -> Result<ALLConfig, config::ConfigError> {
     // 优先使用环境变量传入的配置路径，如果在本地测试则默认使用 ../../config
     let config_path = std::env::var("CONFIG_PATH").unwrap_or_else(|_| "../../config".to_string());

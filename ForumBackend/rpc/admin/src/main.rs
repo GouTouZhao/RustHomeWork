@@ -1,8 +1,14 @@
+// ==========================================
+// 阶段一：模块依赖与协议引入
+// ==========================================
 use common::config::load_config;
 use protocol::admin::admin_server::{Admin, AdminServer};
 use protocol::admin::*;
 use tonic::{transport::Server, Request, Response, Status};
 
+// ==========================================
+// 阶段二：Admin 服务实现与接口逻辑
+// ==========================================
 #[derive(Default)]
 pub struct AdminService {}
 
@@ -23,6 +29,9 @@ impl Admin for AdminService {
     }
 }
 
+// ==========================================
+// 阶段三：Admin 服务主程序配置与启动
+// ==========================================
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let config = load_config()?;

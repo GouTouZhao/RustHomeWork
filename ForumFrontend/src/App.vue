@@ -1,4 +1,7 @@
 <script setup>
+// ==========================================
+// 阶段一：模块导入与组件依赖
+// ==========================================
 import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { partitions } from './data/mock';
@@ -17,6 +20,9 @@ import ToastManager from './components/ToastManager.vue';
 import LoginModal from './components/LoginModal.vue';
 import { showToast } from './utils/toast';
 
+// ==========================================
+// 阶段二：全局状态与变量定义
+// ==========================================
 const router = useRouter();
 const route = useRoute();
 
@@ -26,6 +32,9 @@ const showLoginModal = ref(false);
 
 import api from './api';
 
+// ==========================================
+// 阶段三：认证与用户数据处理
+// ==========================================
 const currentUser = ref({
   isLoggedIn: false,
   nickname: '游客',
@@ -117,6 +126,9 @@ watch(() => route.path, () => {
   }
 });
 
+// ==========================================
+// 阶段四：UI 交互与业务逻辑函数
+// ==========================================
 const toggleTheme = () => {
   isDark.value = !isDark.value;
 };
@@ -183,6 +195,9 @@ const handleAuthAction = () => {
 </script>
 
 <template>
+  <!-- ========================================== -->
+  <!-- 阶段五：组件视图模板结构 -->
+  <!-- ========================================== -->
   <div class="app-container" :class="{ 'dark': isDark }">
     <ToastManager />
     <LoginModal :isVisible="showLoginModal" @close="showLoginModal = false" @loginSuccess="checkAuth" />
@@ -253,6 +268,9 @@ const handleAuthAction = () => {
 </template>
 
 <style scoped>
+/* ========================================== */
+/* 阶段六：组件样式与响应式布局 */
+/* ========================================== */
 .sidebar {
   padding: 20px 0;
   justify-content: space-between;

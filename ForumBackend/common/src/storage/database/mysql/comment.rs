@@ -1,3 +1,6 @@
+// ==========================================
+// 阶段一：模块引入与实体定义
+// ==========================================
 use sea_orm::entity::prelude::*;
 
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
@@ -16,6 +19,9 @@ pub struct Model {
     pub is_deleted: bool,
 }
 
+// ==========================================
+// 阶段二：关系特质与模型行为实现
+// ==========================================
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {}
 

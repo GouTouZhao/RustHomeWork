@@ -1,4 +1,7 @@
 <script setup>
+// ==========================================
+// 阶段一：模块与状态引入
+// ==========================================
 import { computed, watch, ref, onMounted, nextTick, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { partitions } from '../data/mock';
@@ -17,6 +20,9 @@ import {
 } from '../store';
 import { getOssImageUrl } from '../utils/imageCache';
 
+// ==========================================
+// 阶段二：响应式与计算状态定义
+// ==========================================
 const route = useRoute();
 
 const currentPartitionObj = computed(() => {
@@ -33,6 +39,9 @@ const coverImageUrls = ref({});
 // Visibility state for animations
 const visibleItems = ref(new Set());
 
+// ==========================================
+// 阶段三：UI 交互与业务逻辑
+// ==========================================
 const loadCoverImage = async (item) => {
   if (!item.coverImage || coverImageUrls.value[item.id]) return;
   
@@ -97,6 +106,9 @@ const initObserver = () => {
   elements.forEach((el) => observer.observe(el));
 };
 
+// ==========================================
+// 阶段四：组件生命周期与数据侦听
+// ==========================================
 watch(() => route.params.partition, async (newPartition) => {
   currentPartition.value = newPartition;
   currentPage.value = 1;
@@ -123,6 +135,9 @@ onUnmounted(() => {
 </script>
 
 <template>
+  <!-- ========================================== -->
+  <!-- 阶段五：视图结构定义 -->
+  <!-- ========================================== -->
   <div class="partition-view" v-if="currentPartitionObj">
     <div class="partition-header reveal delay-100" :key="'header-' + currentPartition">
       <h1 class="partition-title">{{ currentPartitionObj.name }}</h1>
@@ -186,6 +201,9 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+/* ========================================== */
+/* 阶段六：页面样式定义 */
+/* ========================================== */
 .partition-view {
   max-width: 800px;
   padding-top: 40px;

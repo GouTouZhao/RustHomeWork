@@ -1,3 +1,6 @@
+// ==========================================
+// 阶段一：核心业务服务协议导出 (Admin, BManager, Image)
+// ==========================================
 pub mod admin {
     tonic::include_proto!("newblog.admin");
 }
@@ -10,6 +13,9 @@ pub mod image {
     tonic::include_proto!("newblog.image");
 }
 
+// ==========================================
+// 阶段二：支撑业务服务协议导出 (SDK, Static, User)
+// ==========================================
 pub mod sdkws {
     tonic::include_proto!("newblog.sdkws");
 }

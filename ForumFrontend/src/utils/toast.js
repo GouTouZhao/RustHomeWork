@@ -1,9 +1,15 @@
+// ==========================================
+// 阶段一：状态定义
+// ==========================================
 import { ref } from 'vue';
 
 export const toasts = ref([]);
 
 let idCounter = 0;
 
+// ==========================================
+// 阶段二：核心功能函数
+// ==========================================
 export const showToast = (message, type = 'info') => {
   const id = idCounter++;
   toasts.value.push({ id, message, type });

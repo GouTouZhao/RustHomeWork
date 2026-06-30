@@ -1,3 +1,6 @@
+// ==========================================
+// 阶段一：自定义错误结构体定义
+// ==========================================
 use std::fmt;
 
 #[derive(Debug, Clone)]
@@ -27,6 +30,9 @@ impl CodeError {
     }
 }
 
+// ==========================================
+// 阶段二：错误特质实现与转换
+// ==========================================
 impl fmt::Display for CodeError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         if self.detail.is_empty() {
@@ -40,6 +46,9 @@ impl fmt::Display for CodeError {
 impl std::error::Error for CodeError {}
 
 // Predefined errors
+// ==========================================
+// 阶段三：预定义错误常量与工厂函数
+// ==========================================
 pub const SERVER_INTERNAL_ERROR_CODE: i32 = 500;
 pub const ARGS_ERROR_CODE: i32 = 1001;
 

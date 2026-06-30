@@ -1,7 +1,13 @@
+// ==========================================
+// 阶段一：模块依赖与协议引入
+// ==========================================
 use common::config::load_config;
 use protocol::user::user_server::{User, UserServer};
 use tonic::{transport::Server, Request, Response, Status};
 
+// ==========================================
+// 阶段二：User 服务实现与接口逻辑
+// ==========================================
 #[derive(Default)]
 pub struct UserService {}
 
@@ -48,6 +54,9 @@ impl User for UserService {
     }
 }
 
+// ==========================================
+// 阶段三：User 服务主程序配置与启动
+// ==========================================
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let _config = load_config()?;

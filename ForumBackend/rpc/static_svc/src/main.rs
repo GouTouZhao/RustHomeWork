@@ -1,8 +1,14 @@
+// ==========================================
+// 阶段一：模块依赖与协议引入
+// ==========================================
 use common::config::load_config;
 use protocol::static_svc::static_server::{Static, StaticServer};
 use protocol::static_svc::*;
 use tonic::{transport::Server, Request, Response, Status};
 
+// ==========================================
+// 阶段二：Static 服务实现与接口逻辑
+// ==========================================
 #[derive(Default)]
 pub struct StaticService {}
 
@@ -33,6 +39,9 @@ impl Static for StaticService {
     }
 }
 
+// ==========================================
+// 阶段三：Static 服务主程序配置与启动
+// ==========================================
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let _config = load_config()?;
