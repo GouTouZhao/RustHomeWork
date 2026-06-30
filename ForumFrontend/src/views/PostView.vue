@@ -3,7 +3,7 @@ import { ref, onMounted, computed, nextTick } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import api from '../api';
 import { showToast } from '../utils/toast';
-import { currentPartition } from '../store';
+import { currentPartition, paginatedList, totalCount } from '../store';
 import Compressor from 'compressorjs';
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
@@ -465,6 +465,28 @@ const submitPost = async () => {
     }
 
     if (res.data && res.data.errCode === 0) {
+      if (!isEditingPost.value) {
+        const dateStr = new Date().toISOString().split('T')[0];
+        const newPost = {
+          id: res.data?.data?.article_id || Date.now().toString(),
+          title: title.value,
+          excerpt: finalContent.substring(0, 100).replace(/\n/g, ' '),
+          date: dateStr,
+          viewCount: 0,
+          likeCount: 0,
+          coverImage: coverImageKey.value || '',
+          authorId: userId
+        };
+        paginatedList.value.unshift(newPost);
+        totalCount.value++;
+      } else {
+        const post = paginatedList.value.find(p => p.id == editId.value);
+        if (post) {
+          post.title = title.value;
+          post.excerpt = finalContent.substring(0, 100).replace(/\n/g, ' ');
+          post.coverImage = coverImageKey.value || '';
+        }
+      }
       showToast(isEditingPost.value ? '修改成功！' : '发布成功！', 'success');
       router.back();
     } else {
